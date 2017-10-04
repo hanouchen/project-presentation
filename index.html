@@ -338,6 +338,13 @@ In our case with the alert system, we might say when a user creatrice change ale
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+			Reveal.configure({
+  			keyboard: {
+			    13: 'next', // go to the next slide when the ENTER key is pressed
+			    27: function() {}, // do something custom when ESC is pressed
+			    32: null // don't do anything when SPACE is pressed (i.e. disable a reveal.js default binding)
+			  }
+			});
 		</script>
 	</body>
 </html>
