@@ -1,371 +1,343 @@
 <!doctype html>
-<html lang="en">
-
+<html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
-
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
-
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- For syntax highlighting -->
+		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<!-- Printing and PDF exports -->
 		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
 	</head>
-
 	<body>
-
 		<div class="reveal">
-
-			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
+
+				<section> 
+					<h3>
+						Bloomberg L.P.<br/> 
+						Industrial Placement
+					</h1>
 					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						<small style="color:orange">Presented by Hanou Chen (hc3314)</small><br/>
+						<small>2017.10.05</small>
 					</p>
-				</section>
-
-				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#/2/1">down</a>.
-						</p>
-						<a href="#/2/1" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview. Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>rvl.io</h2>
-					<p>
-						If you don't like writing slides in HTML you can use the online editor <a href="http://www.rvl.io" target="_blank">rvl.io</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
-				</section>
-
-				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-							<section data-markdown>
-							  ## Markdown support
-
-							  For those of you who like that sort of thing.
-							  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-							</section>
-					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?#/themes">Default</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
-				</section>
-
-				<section>
-					<section data-state="alert">
-						<h2>Global State</h2>
-						<p>
-							Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-							will be added as a class to the document element when the slide is open. This lets you
-							apply broader style changes, like switching the background.
-						</p>
-						<a href="#/7/1" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="blackout">
-						<h2>"blackout"</h2>
-						<a href="#/7/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="soothe">
-						<h2>"soothe"</h2>
-						<a href="#/7/0" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
-
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code contenteditable style="font-size: 18px; margin-top: 20px;">Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						The nice thing about standards is that there are so many to choose from</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) ) {
-        node.className += ' roll';
-      }
-    };
-  }
-}
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<section>
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
 
 						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
+							Hello everyone, my name is Hanou, for the next 12 minutes, I am going to talk about my placement experience at Bloomberg.
+						</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Bloomberg L.P.</h2>
+						<aside class="notes">
+							I will start off by talking about the company’s background, prodcut and some information about the team that I worked with. 
+						</aside>
+
+					</section>
+
+					<section>
+						<h3>Company Background</h3>
+						<div style="display:inline-block">
+							<ul style="float:left; font-size:30px">
+							    <li style="margin: 40px 0">Financial software & news</li>
+								<li style="margin: 40px 0">Founded in 1981</li>
+								<li style="margin: 40px 0">4,800+ engineers</li>
+								<li style="margin: 40px 0">325,000+ subscriptions</li>
+							</ul>
+							<img src="images/mike.jpg" style="width:55%; height:55%; float:right; box-shadow:none">
+						</div>
+						<aside class="notes">
+							Bloomberg is a financial software & news company founded by Mike Bloomberg in 1981, with more than 4800 engineers in the R&D department. The core revenue generating product of Bloomberg is a software called the Bloomberg Terminal which has 320,000+ subscriptions, and clients of the terminal include most financial institutions like investment banks and funds/asset management firms. 
+						</aside>
+					</section>
+
+					<section style="padding:0px 0px 0px 0px">
+						<div style="display:inline-block">
+							<h3 style="float:center">Bloomberg Terminal <img src="images/terminal_logo.png" style="width:6%; height:6%; position:relative; top:27px; left:10px;"> </h3>
+						</div>
+						<ul>
+							<li style="margin: 20px 0">Provides market data and analytics</li>
+							<li style="margin: 20px 0">Proprietary communication system</li>
+						</ul>
+						<div style="margin-left:0px; margin-right:0px; padding-left:0px; padding-right:0px; display:inline-block;">
+							<img src="images/Bloomberg_Terminal_1.jpg" style="width:30%; height:30%; float:left; box-shadow:none; margin-right:0.5%;">
+							<img src="images/Bloomberg_Terminal_2.jpg" style="width:28.4%; height:28.4%; float:left; box-shadow:none; margin-right:0.5%;">
+							<img src="images/Bloomberg_Terminal_3.jpg" style="width:37.9%; height:50%; float:left; box-shadow:none;">
+						</div>
+						<aside class="notes">
+							So, the terminal is basically a large software system with thousands of functionalities, for example it allows finance professionals to monitor and analyse real-time market data and place trades on electronic trading platforms. Also it comes with a set of proprietary communications tools, basically e-mail and instant messages applications. All these features are called functions, similar to shell commands in linux. And functions inside the terminal are maintained by different teams at Bloomberg. 
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					
+					<section>
+						<h3>Alerts Team</h3>
+						<ul>
+							<li style="">MLRT, Market Data Alerts - Alert me when...</li>
+						</ul>
+							<img src="images/mlrt.png" style="width:100%; height:100%">
+						<aside class="notes">
+							The team I’ve worked in, Alerts, for example, is responsible for developing a market alerting product in the Bloomberg Terminal MLRT, which stands for Market Data Alerts. And as the name suggests It allows users to set up alerts on market data. For example a user can say alert me when the price of IBM has reached 150$. Then if at some point the price of IBM has reached the set threshold, the user will get a notification through different channels, for instance a pop-window in the terminal application or an email.
+						</aside>
+					</section>
+			 </section>
+
+				<section>
+					<section>
+						<h3 style="color:cyan">List alert in MLRT</h3>
+						<ul>
+							<li style="margin: 20px 0">MLRT - create market data alerts on a single security</li>
+							<li style="margin: 20px 0">What about alerts on a list of securities?</li>
+							<li style="margin: 20px 0">Lists can be created by other functions - PORT, MON </li>
+						</ul>	
+						<aside class="notes">
+							My first project is related to MLRT, which is building a list feature publisher for MLRT. We just saw that MLRT allows user to create market data alerts, but only on a single security at a time. But very often terminal users have more than one, but a group of multiple securities that they are interested in. For example, many clients use the terminal function MON, monitor, to create security monitors, each sec monitor is a list of securities and users can monitor their price change, or trading events. Therefore it is natural that users want the ability to create an alert on a security monitor, or in general, on any list of securities. So we want to extend MLRT to support alerts on list. 
+						</aside>
+					</section>
+
+					<section>
+						<h3 style="color:cyan">Building the list alert feature</h3>
+						<ul style="margin: 0px 0px; list-style:none">
+							<li style="margin: 20px 0">&#9633 Frontend UI changes</li>
+							<!-- <li>Coding for production</li> -->
+							<li style="margin: 20px 0">&#9633 Changes in existing backend services</li>
+							<li style="margin: 20px 0 ">
+								&#9633 <font color="orange">Building a backend service for getting list data</font>
+								<ul style="margin: 20px; font-size:24px; list-style:none">
+									<li style="margin: 20px 10px">- What securities are in security monitor 2 of user Tom?</li>
+									<li style="margin: 20px 10px">- Did Tom change the security monitor?</li>
+								</ul>
+							</li>
+						</ul>
+						<aside class="notes">
+							To build this feature, first we need to change the UI to give user the option of creating a list alert. And with that comes some changes in existing backend services to support the new list alert definition. 
+							The most important problem we need to solve is, when the user says I want to create an alert on list X, that he created in another terminal function, maintained by another team, how do we know what securities are in that list? Because as long as we have this information, we could re-use the existing alert infrastracture since it already handles single security alerts. In addition to knowing the content of a list, we also need to know when the list changes, for example if the user adds a new security to the list, then we need to start evaluating alert conditions on the new security. 
+						</aside>
+
+					</section>
+
+					<section>
+						<h3>Getting list data in Bloomberg</h3>
+						<img src="images/bliss.png" style="width:80%; height:70%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
+						<aside class="notes">
+							Fortunately this is not an old problem, and there are two services that Bloomberg Applications can use to get list data. The first one is by calling a static list service, which uses a request-response paradigm. To get the content of a list you simply send a request, and the service will respond by telling you what securities are in the list. But you essentially have to keep sending requests to make sure you always have the latest list content.
+						</aside>
+					</section>
+
+					<section>
+						<h3>Getting list data in Bloomberg</h3>
+						<img src="images/dlist.png" style="width:80%; height:50%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
+						<aside class="notes">
+							To solve this problem, there is a dynamic list service for getting list data at Bloomberg. This service adopts a pub-sub paradigm. To get the content of a list, your application subscribes to the service, if at some point the list has been changed by the user, the dlist service will publish an update to your application, to notify your application some changes happened to that list. However the dynamic list service is very new and it’s not ready to handle to load we have at the moment. 
+						</aside>
+					</section>
+
+					<section>
+						<h3 style="color:cyan">List publisher for Alerts</h3>
+						<img src="images/alertlistpub.png" style="width:100%; height:100%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
+						<aside class="notes">
+							So the key part of my project, is to build a list publisher for our alert infrastructure, that utilises both static & dynamic list service mentioned above. When the user creates an alert on a list, the core alert engine, will subscribe to the alertlistpub, the alert list pub will choose to either forward this subscription to the dynamic list service, if it thinks this list is likely to be changed very often. Otherwise it queries the static list service periocially, the interval is based on how often the list changes. As far as the core alert engine is concerned, it thinks all updates it receives are real-time. And the list publisher makes sure we get as much real time update as possible without overloading the dlist engine. 
+						</aside>
+					</section>
+
+<!-- 					<section>
+						<h3 style="color:cyan">Learning Outcomes</h3>
+						<ul>
+							<li>
+								Better understanding of relevant courses
+								<ul style="font-size:24px; color:white">
+									<li>Software Engineering - Design</li>
+									<li>Concurrency</li>
+									<li>Compiler</li>
+								</ul>
+							</li>
+							<li>C++ coding practices, techniques</li>
+							<li>Test Driven Development</li>
+						</ul>
+						<aside class="notes">
+							By working on this project, I was able to gain some further understanding of some concepts introduced in the courses at Imperial, for example how to apply common design patterns to create scalable and reusable components, and how to design the threading of your application to avoid concurrency bugs. Since the list publisher is a C++ service, I also learned some more in-depth c++ coding techniques & practices during the development. For example how to code for production and log the correct information at the correct place so that when my application does go down, I can debug it more easily. In terms of the state of the project, by the time I finished my placement, the list alert feature is now deployed and rolled out to internal users.
+						</aside>
+					</section> -->
+
+					<section>
+						<h3 style="color:cyan">Building the list alert feature</h3>
+						<ul style="margin: 0px 0px; list-style:none">
+							<li style="margin: 20px 0">&#9745 Frontend UI changes</li>
+							<!-- <li>Coding for production</li> -->
+							<li style="margin: 20px 0">&#9745 Changes in existing backend services</li>
+							<li style="margin: 20px 0 ">
+								&#9745 Building a backend service for getting list data
+							</li>
+							<li style="margin: 20px 0 ">
+								&#9745 List alert feature rolled out to internal users
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h3>Alert system testing using docker</h3>
+					</section>
+					<section>
+						<h3>The Alerts pipeline</h3>
+						<img src="images/pipeline.png" style="width:120%; height:120%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
+						<aside class="notes">
+							The second project is a system testing tool built for the Alert infrastructure. The alert infrastructure consists of several backend services, each of them is responsible for a different thing, like accessing database, talking to external services or evaluating alert conditions when there is a market event. When the user creates an alert, it goes through all these services, gets processed, so that triggers can be delivered to the user. These services each has their respective unit test, and integration test suite, but these tests only verify the correctness of an individual application, they are not very good at catching bugs that could happen during the interaction between different components.
 						</aside>
 					</section>
 					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
+						<h3>We want to build a test that ..</h3>
+						<ul style="margin-left:10px">
+							<li style="margin: 20px 0">tests the entire alerts pipeline at once</li>
+							<li style="margin: 20px 0">is fully automated</li>
+							<li style="margin: 20px 0">is fully isolated</li>
+						</ul>
+						<aside class="notes">
+							 So we wanted to build a test that simulates a production like environment so that it allows us to test all the applications in the alert infrastructure at once. At the same time, this test should be fully automated and fully isolated, which means it does not rely on any external services being available, and can be run anywhere.
+						</aside>
+
 					</section>
-				</section>
+					<section>
+						<h3>Containers</h3>
+						<p style="text-align:left">
+							<small>A container image is a lightweight, stand-alone, executable package of a piece of software that includes everything needed to run it: code, runtime, system libraries, settings.</small>
+							</br>
+							</br>
+						</p>
+						<img src="images/docker.png" style="width:10%; height:10%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
+						<p style="text-align:left">
+							<small>Docker provides tools that make it easy to package, ship and run any application in a lightweight container.</small>
+						</p>
+						<aside class="notes">
+							Given these requirements, we decided to use containers to build the test, and more specifically docker. A container is basically a light-weight executable package of an application that contains everything needed to run the application, including code, libraries and configurations. And docker provides tools that makes running applications in containers a lot easier.
+						</aside>
+					</section>
+					<section>
+						<h3>Build the test with docker</h3>
+						<img src="images/compose.png" style="width:100%; height:100%; background:none; border:0; margin-top:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
+						<aside class="notes">
+							 So this is how the test is structured, each application in the alert pipeline is run in a separate container. The reason to do this is to make sure that the applications do not interfere with each other. For example if we change the system clock of a container for testing purpose, we don't have to worry about breaking another service which also relies on the system clock since it runs in a different container. Then we also bring up a container that runs the test, it will send mock alert definitions into the alert system, and expect certain triggers to be sent out at the end of the alert pipeline. We also use an orchestrating tool, docker-compose, so that the applications in different containers can join the same network and communicate with each other, this basically completes the final step of creating a production-like setup.
+						</aside>
+					</section>
+					<!-- <section>
+						<h3>Behave framework</h3>
+						<pre><code data-trim data-noescape>
+							Feature: showing off behave
+							
+							  Scenario: run a simple test
+								 Given we have behave installed
+								 when we implement a test
+								 then behave will test it for us!	
+						</code></pre>
+						<pre><code data-trim data-noescape>
+							from behave import *
+							
+							@given('we have behave installed')
+							def step_impl(context):
+								pass
+							
+							@when('we implement a test')
+							def step_impl(context):
+								assert True is not False
+							
+							@then('behave will test it for us!')
+							def step_impl(context):
+								assert context.failed is False
+						</code></pre>
+						<aside class="notes">
+							That’s why we decided to use a framework behave. Behave is a python testing framework. It allows test cases to be written in a syntax similar to natural language and we think it's very suitable for writing high-level system test. Here we say 
+In our case with the alert system, we might say when a user creatrice change alerts. When there is a tick, user gets an e-mail. Behind all these English sentences there are some python code, this is where we actually implement the test and mock all the external services that might get called during the test. 
+						</aside>
+					</section> -->
+					<section>
+						<h3>Integrate the test into CI pipeline</h3>
+						<img src="images/ci.png" style="width:100%; height:100%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
+						<aside class="notes">
+							
+						</aside>
+					</section>
 
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-					</a>
+<!-- 					<section>
+						<h3>Learning Outcomes & Summary</h3>
+						<ul>
+							<li>Python coding</li>
+							<li>New technologies (for me) - docker, behave</li>
+							<li>Test suite is being extended as new featuers are implemented</li>
+						</ul>
+						<aside class="notes">
+							During this project, I learned some python coding, how to use docker & behave framework, those are all technologies that I was not familiar with but are pretty popular in the industry. In terms of the end results, I've built the test and written several initial test cases. The test is integrated into the continuous integration pipeline of the Alerts team, and the test suite is run for each pull request on any of the alert infra services.
+					</section> -->
 				</section>
-
 				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
-					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
-					<script>
-						document.getElementById('slideshare').attributeName = 'allowfullscreen';
-					</script>
+						<h3 style="color:cyan">Learning Outcomes & Conclusion</h3>
+						<ul>
+							<li>
+								Better understanding of relevant courses
+								<ul style="font-size:24px; color:white">
+									<li>Software Engineering - Design</li>
+									<li>Concurrency</li>
+									<li>Compiler</li>
+								</ul>
+							</li>
+							<li>Good coding practices, techniques</li>
+							<li>Soft skills</li>
+						</ul>
+						<aside class="notes">
+							By working on this project, I was able to gain some further understanding of some concepts introduced in the courses at Imperial, for example how to apply common design patterns to create scalable and reusable components, and how to design the threading of your application to avoid concurrency bugs. Since the list publisher is a C++ service, I also learned some more in-depth c++ coding techniques & practices during the development. For example how to code for production and log the correct information at the correct place so that when my application does go down, I can debug it more easily. In terms of the state of the project, by the time I finished my placement, the list alert feature is now deployed and rolled out to internal users.
+						</aside>
 				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take disctracting slides off the screen
-						during a presentation.
-					</p>
-				</section>
-
-				<section>
-					<h2>Stellar Links</h2>
-					<ul>
-						<li><a href="https://github.com/hakimel/reveal.js">Source code on GitHub</a></li>
-						<li><a href="http://hakim.se/projects/reveal-js">Leave feedback on my site</a></li>
-						<li><a href="http://twitter.com/hakimel">Follow me on Twitter</a></li>
+<!-- 				<section>
+					<h3>Conclusion</h3>
+					<ul style="margin-left:10px; list-style:none">
+						<li style="margin: 20px 0; color:#449E44">+ Technical skill development</li>
+						<li style="margin: 20px 0; color:#449E44">+ Soft skill development</li>
+						<li style="margin: 20px 0; color:#449E44">+ Building a network - nice people, lots of events</li>
+						<li style="margin: 20px 0; color:red">- Some work involves hacking around legacy code</li>
 					</ul>
-				</section>
-
+					<aside class="notes">
+						Some conclusions about the overall placement experience. I believe I was able to improve my technical skills by doing lots of practical work, some of them are client facing & some of them are for internal developers. Also by working with my team & working with other teams, I learned some soft skills, so for example how to write a ticket to other teams, or how to chase after other people when they are not very responsive etc. And from what I’ve seen, the people here great, they are very helpful and very nice. The company also organised tons of events including tech talks, networking and some volunteering. One thing that could be improved IMO is that some project involves working with legacy code. But overall I think the projects are great and they are highly relevant to our course and the placement experience is fantastic. Thanks for listening, any questions?
+					</aside>
+				</section> -->
 				<section>
-					<h2>It's free</h2>
-					<p>
-						reveal.js and <a href="http://www.rvl.io">rvl.io</a> are entirely free but if you'd like to support the projects you can donate below.
-						Donations will go towards hosting and domain costs.
-					</p>
-					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-						<input type="hidden" name="cmd" value="_donations">
-						<input type="hidden" name="business" value="hakim.elhattab@gmail.com">
-						<input type="hidden" name="lc" value="US">
-						<input type="hidden" name="item_name" value="reveal.js / rvl.io">
-						<input type="hidden" name="no_note" value="0">
-						<input type="hidden" name="currency_code" value="USD">
-						<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">
-						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-					</form>
-				</section>
-
-				<section>
-					<h1>THE END</h1>
-					<h3>BY Hakim El Hattab / hakim.se</h3>
+					Thanks for listening! Questions?
 				</section>
 
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+		<script src="js/reveal.js"></script>
 
 		<script>
-
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
-
-				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-
 		</script>
-
 	</body>
 </html>
