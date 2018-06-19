@@ -7,10 +7,10 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/white.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/default.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -25,301 +25,610 @@
 		<div class="reveal">
 			<div class="slides">
 
-
-				<section> 
+				<section>
 					<h3>
-						Bloomberg L.P.<br/> 
-						Industrial Placement
-					</h1>
+						KLEE Symbolic Debugger
+					</h3>
 					<p>
-						<small style="color:orange">Presented by Hanou Chen (hc3314)</small><br/>
-						<small>2017.10.05</small>
+						<small style="color:darkorange">Presented by Hanou Chen (hc3314)</small><br/>
+						<small>2018.6.26</small>
 					</p>
 
 						<aside class="notes">
-							Hello everyone, my name is Hanou, for the next 12 minutes, I am going to talk about my placement experience at Bloomberg.
 						</aside>
 				</section>
 
 				<section>
 					<section>
-						<h2>Bloomberg L.P.</h2>
-						<aside class="notes">
-							I will start off by talking about the company’s background, prodcut and some information about the team that I worked with. 
-						</aside>
-
+						<h2>Motivation</h2>
+						<aside class="notes"></aside>
 					</section>
 
 					<section>
-						<h3>Company Background</h3>
-						<div style="display:inline-block">
-							<ul style="float:left; font-size:30px">
-							    <li style="margin: 40px 0">Financial software & news</li>
-								<li style="margin: 40px 0">Founded in 1981</li>
-								<li style="margin: 40px 0">4,800+ engineers</li>
-								<li style="margin: 40px 0">325,000+ subscriptions</li>
+						<h5 align="left">Testing is Important</h5>
+						<hr>
+
+						<p style="font-size: 65%" align="left">But, manual testing can be difficult</p>
+						<div align="left" style="padding:0px">
+							<ul style="margin-left: 50px; margin-top: 0px; padding: 0px; font-size: 65%" text-align="left">
+								<li>edge cases, rare circumstances</li>
+								<li style="margin-top:20px">Nondeterminsm</li>
 							</ul>
-							<img src="images/mike.jpg" style="width:55%; height:55%; float:right; box-shadow:none">
 						</div>
+
+						<p style="font-size: 65%; margin-top: 100px" align="left">Random testing can be ineffective</p>
+						<div align="left" style="padding:0px">
+							<ul style="margin-left: 50px; margin-top: 0px; padding: 0px; font-size: 65%" text-align="left">
+								<li>hard to find deep, well-hidden bugs</li>
+							</ul>
+						</div>
+
 						<aside class="notes">
-							Bloomberg is a financial software & news company founded by Mike Bloomberg in 1981, with more than 4800 engineers in the R&D department. The core revenue generating product of Bloomberg is a software called the Bloomberg Terminal which has 320,000+ subscriptions, and clients of the terminal include most financial institutions like investment banks and funds/asset management firms. 
 						</aside>
+					</section>
+					<section>
+						<h5 align="left">&#9817 Symbolic Execution</h5>
+						<hr>
+						<p style="font-size: 65%" align="left">Key Idea - automatically explore all paths of a program</p>
+					</section>
+					<section>
+                        <h5>Example</h5>
+                        <div style="padding: 0%; margin: 0%; width: 110%;">
+                            <div style="padding: 0%; margin: 0%; width: 49%; float: left;" display="inline-block">
+                                <pre><code class="c" style="padding: 0%; font-size: 100%">
+  void foo(int a, int b) {
+      if (a == b) {
+          return;
+      }
+
+      if (a > 0) {
+          printf("%d %d\n", a, b);
+          return;
+      } else {
+          assert(a + b != 0);
+      }
+  }
+                                </code></pre>
+                            </div>
+							<img src="images/symbolic_execution_example.png" border=none width="50%" height="50%" style="background:none; border:none; box-shadow:none;"/>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h5 align="left">Challenges</h5>
+                        <hr>
+                        <div style="padding: 0%; position: relative">
+                            <div class="fragment fade-in" style="position: absolute; top: 0%; left: 0%; width: 40%; padding: 0%; margin: 0%;">
+                                <div class="fragment fade-out" style="width: 100%; padding: 0%; margin: 0%">
+                                    <p style="font-size: 65%" align="left">Path explosion:</p>
+                                    <pre style="padding: 0%; margin: 0%;"><code align="left" class="c" style="padding: 0%">
+  for(;;) {
+      if (condition) {
+          doThis();
+      } else {
+          doThat();
+      }
+  }
+                                    </code></pre>
+                                </div>
+                            </div>
+
+                            <div align="left" class="fragment fade-in" style="position: absolute; top: 0%; left: 0%; width: 55%; padding: 0%">
+                                <p style="font-size: 65%" align="left">And others:</p>
+                                <ul style="margin-left: 50px; padding: 0px; font-size: 65%" text-align="left">
+                                        <li>Solving complex constraints</li>
+                                        <li style="margin-top:40px">Handling environment interactions</li>
+                                        <li style="margin-top:40px">Memory model</li>
+                                        <li style="margin-top:40px">State scheduling</li>
+                                        <li style="margin-top:40px">...</li>
+                                </ul>
+                            </div>
+                        </div>
+					</section>
+					
+					<section>
+						<h5 align="left">Interactive Debuggers</h5>
+						<hr>
+						<p style="font-size: 65%" align="left">Debuggers are great tools for runtime analysis</p>
+						<div align="left" style= "padding: 0">
+							<ul style="margin-left: 50px; padding: 0px; font-size: 55%" text-align="left">
+									<li>GNU Debugger (GDB)</li>
+									<li style="margin-top:30px">LLVM Debugger (LLDB)</li>
+									<li style="margin-top:30px">...</li>
+							</ul>
+						</div>
+						<img align="left" src="images/gdb.png" border=none width="40%" height="40%" style="background:none; border:none; box-shadow:none;"/>
 					</section>
 
-					<section style="padding:0px 0px 0px 0px">
-						<div style="display:inline-block">
-							<h3 style="float:center">Bloomberg Terminal <img src="images/terminal_logo.png" style="width:6%; height:6%; position:relative; top:27px; left:10px;"> </h3>
+					<section>
+						<h5 align="left">Symbolic Execution + Interactive Debugger</h5>
+						<hr>
+						<div align="left" style= "padding: 0">
+							<ul style="margin-left: 50px; padding: 0px; font-size: 60%" text-align="left">
+								<li>Use symbolic execution's <font class="fragment highlight-red">analytical power</font> to find more bugs</li>
+								<li style="margin-top:50px">Use developers' knowledge to <font class="fragment highlight-red">guide symbolic execution</font></li>
+							</ul>
 						</div>
-						<ul>
-							<li style="margin: 20px 0">Provides market data and analytics</li>
-							<li style="margin: 20px 0">Proprietary communication system</li>
-						</ul>
-						<div style="margin-left:0px; margin-right:0px; padding-left:0px; padding-right:0px; display:inline-block;">
-							<img src="images/Bloomberg_Terminal_1.jpg" style="width:30%; height:30%; float:left; box-shadow:none; margin-right:0.5%;">
-							<img src="images/Bloomberg_Terminal_2.jpg" style="width:28.4%; height:28.4%; float:left; box-shadow:none; margin-right:0.5%;">
-							<img src="images/Bloomberg_Terminal_3.jpg" style="width:37.9%; height:50%; float:left; box-shadow:none;">
-						</div>
-						<aside class="notes">
-							So, the terminal is basically a large software system with thousands of functionalities, for example it allows finance professionals to monitor and analyse real-time market data and place trades on electronic trading platforms. Also it comes with a set of proprietary communications tools, basically e-mail and instant messages applications. All these features are called functions, similar to shell commands in linux. And functions inside the terminal are maintained by different teams at Bloomberg. 
-						</aside>
 					</section>
+
 				</section>
 
 				<section>
 					
 					<section>
-						<h3>Alerts Team</h3>
-						<ul>
-							<li style="">MLRT, Market Data Alerts - Alert me when...</li>
-						</ul>
-							<img src="images/mlrt.png" style="width:100%; height:100%">
+						<h3>KLEE Symbolic Debugger</h3>
+						<p>An interactive debugger to control symbolic execution</p>
 						<aside class="notes">
-							The team I’ve worked in, Alerts, for example, is responsible for developing a market alerting product in the Bloomberg Terminal MLRT, which stands for Market Data Alerts. And as the name suggests It allows users to set up alerts on market data. For example a user can say alert me when the price of IBM has reached 150$. Then if at some point the price of IBM has reached the set threshold, the user will get a notification through different channels, for instance a pop-window in the terminal application or an email.
 						</aside>
 					</section>
-			 </section>
+					<section>
+						<h5 align="left">Using KLEE</h5>
+						<hr>
+						<div align="left" style= "padding: 0">
+							<ol style="margin-left: 50px; padding: 0px; font-size: 70%" text-align="left">
+								<li> Compile code into LLVM bitcode </li>
+								<li style="margin-top:50px"> Run KLEE on the bitcode </li>
+								<li style="margin-top:50px">
+										<img align="left" src="images/klee.png" border=none width="60%" height="60%" style="background:none; border:none; box-shadow:none;"/>
+								</li>
+							</ol>
+						</div>
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section>
+							<h5 align="left">Using KLEE Symbolic Debugger</h5>
+							<hr>
+							<div align="left" style= "padding: 0">
+								<ol style="margin-left: 50px; padding: 0px; font-size: 70%" text-align="left">
+									<li> Compile code into LLVM bitcode </li>
+									<li style="margin-top:50px"> Run KLEE with option "--use-debugger" </li>
+									<li style="margin-top:50px">
+											<img align="left" src="images/kleedb.png" border=none width="65%" height="65%" style="background:none; border:none; box-shadow:none;"/>
+									</li>
+								</ol>
+							</div>
+							<aside class="notes">
+							</aside>
+						</section>
+					<section>
+						<h5 >System Architecture</h5>
+						<hr>
+						<div align="left" style="padding: 0; margin: 0">
+							<img src="images/kdb_klee.png" border=none width="50%" height="50%" style="background:none; border:none; box-shadow:none;"/>
+							<div class="fragment" data-fragment-index="1" align="left" style="padding: 0%; margin: 0%; float: right; width: 45%; padding-top: 30px; position: absolute; top: 120px; left:520px">
+								<span style="margin-top: 90px" class="fragment fade-out" data-fragment-index="2">Prompt:</span>
+								<ul class="fragment fade-out" data-fragment-index="2" style="margin-left: 60px; padding: 0px; font-size: 80%" text-align="left">
+										<li style="margin-top: 30px">basic input processing</li>
+										<li style="margin-top: 30px">command line utils</li>
+										<li style="margin-top: 30px">owns a list of commands</li>
+								</ul>
+							</div>
+							<div class="fragment" data-fragment-index="3" align="left" style="padding: 0%; margin: 0%; float: right; width: 45%; padding-top: 30px; position: absolute; top: 120px; left:520px">
+								<span style="margin-top: 90px" class="fragment fade-out" data-fragment-index="4">Command:</span>
+								<br>
+								<img class="fragment fade-out" data-fragment-index="4" src="images/command_uml.png" border=none width="120%" height="120%" style="background:none; border:none; box-shadow:none; margin-left: 30px; margin-top: 30px"/>
+							</div>
+							<div class="fragment" data-fragment-index="5" align="left" style="padding: 0%; margin: 0%; float: right; width: 45%; padding-top: 30px; position: absolute; top: 120px; left:520px">
+								<span style="margin-top: 90px" class="fragment fade-out" data-fragment-index="6">KleeDebugger:</span>
+								<ul class="fragment fade-out" data-fragment-index="6" style="margin-left: 60px; padding: 0px; font-size: 80%" text-align="left">
+										<li style="margin-top: 30px">conecptual "backend"</li>
+										<li style="margin-top: 30px">builds object graph</li>
+										<li style="margin-top: 30px">stores configurations, shared data</li>
+								</ul>
+							</div>
+							<div class="fragment" data-fragment-index="7" align="left" style="padding: 0%; margin: 0%; float: right; width: 45%; padding-top: 30px; position: absolute; top: 120px; left:520px">
+								<span style="margin-top: 90px">DebugUtils:</span>
+								<br>
+								<ul class="fragment fade-out" data-fragment-index="8" style="margin-left: 60px; padding: 0px; font-size: 80%" text-align="left">
+										<li style="margin-top: 30px">logging</li>
+										<li style="margin-top: 30px">file utilities</li>
+								</ul>
+							</div>
+							<div class="fragment" data-fragment-index="1" style="position: absolute; left:190px; top:160px; padding: 0px; margin: 0px;">
+								<svg class= "fragment fade-out" data-fragment-index="2" width="100" height="100">
+										<ellipse cx="50" cy="38" rx="45" ry="25"
+										style="fill:transparent;stroke:red;stroke-width:2" />
+								</svg>
+							</div>
+							<div class="fragment" data-fragment-index="3" style="position: absolute; left:57px; top:250px; padding: 0px; margin: 0px;">
+								<svg class= "fragment fade-out" data-fragment-index="4" width="130" height="100">
+										<ellipse cx="50" cy="38" rx="50" ry="25"
+										style="fill:transparent;stroke:red;stroke-width:2" />
+								</svg>
+							</div>
+							<div class="fragment" data-fragment-index="3" style="position: absolute; left:190px; top:250px; padding: 0px; margin: 0px;">
+								<svg class= "fragment fade-out" data-fragment-index="4" width="130" height="100">
+										<ellipse cx="50" cy="38" rx="50" ry="25"
+										style="fill:transparent;stroke:red;stroke-width:2" />
+								</svg>
+							</div>
+							<div class="fragment" data-fragment-index="3" style="position: absolute; left:330px; top:250px; padding: 0px; margin: 0px;">
+								<svg class= "fragment fade-out" data-fragment-index="4" width="130" height="100">
+										<ellipse cx="50" cy="38" rx="50" ry="25"
+										style="fill:transparent;stroke:red;stroke-width:2" />
+								</svg>
+							</div>
+							<div class="fragment" data-fragment-index="7" style="position: absolute; left:125px; top:345px; padding: 0px; margin: 0px;">
+								<svg class= "fragment fade-out" data-fragment-index="8" width="130" height="100">
+										<ellipse cx="50" cy="38" rx="50" ry="25"
+										style="fill:transparent;stroke:red;stroke-width:2" />
+								</svg>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h5 >System Design - Interaction</h5>
+						<hr>
+						<img src="images/klee_main_loop.png" border=none width="50%" height="50%" style="background:none; border:none; box-shadow:none;"/>
+					</section>
+				</section>
 
 				<section>
 					<section>
-						<h3 style="color:cyan">List alert in MLRT</h3>
-						<ul>
-							<li style="margin: 20px 0">MLRT - create market data alerts on a single security</li>
-							<li style="margin: 20px 0">What about alerts on a list of securities?</li>
-							<li style="margin: 20px 0">Lists can be created by other functions - PORT, MON </li>
-						</ul>	
-						<aside class="notes">
-							My first project is related to MLRT, which is building a list feature publisher for MLRT. We just saw that MLRT allows user to create market data alerts, but only on a single security at a time. But very often terminal users have more than one, but a group of multiple securities that they are interested in. For example, many clients use the terminal function MON, monitor, to create security monitors, each sec monitor is a list of securities and users can monitor their price change, or trading events. Therefore it is natural that users want the ability to create an alert on a security monitor, or in general, on any list of securities. So we want to extend MLRT to support alerts on list. 
-						</aside>
+						<h3 >Controlling Execution</h3>
 					</section>
 
 					<section>
-						<h3 style="color:cyan">Building the list alert feature</h3>
-						<ul style="margin: 0px 0px; list-style:none">
-							<li style="margin: 20px 0">&#9633 Frontend UI changes</li>
-							<!-- <li>Coding for production</li> -->
-							<li style="margin: 20px 0">&#9633 Changes in existing backend services</li>
-							<li style="margin: 20px 0 ">
-								&#9633 <font color="orange">Building a backend service for getting list data</font>
-								<ul style="margin: 20px; font-size:24px; list-style:none">
-									<li style="margin: 20px 10px">- What securities are in security monitor 2 of user Tom?</li>
-									<li style="margin: 20px 10px">- Did Tom change the security monitor?</li>
-								</ul>
-							</li>
-						</ul>
-						<aside class="notes">
-							To build this feature, first we need to change the UI to give user the option of creating a list alert. And with that comes some changes in existing backend services to support the new list alert definition. 
-							The most important problem we need to solve is, when the user says I want to create an alert on list X, that he created in another terminal function, maintained by another team, how do we know what securities are in that list? Because as long as we have this information, we could re-use the existing alert infrastracture since it already handles single security alerts. In addition to knowing the content of a list, we also need to know when the list changes, for example if the user adds a new security to the list, then we need to start evaluating alert conditions on the new security. 
-						</aside>
-
+						<h5 align="left">Controlling Execution</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul  style="margin-left: 50px; padding: 0px; font-size: 75%" text-align="left">
+									<li class="fragment" style="margin-top: 40px">
+										step, stepi
+										<br>
+										<img src="images/step_twice.png" border=none width="40%" height="40%" style="background:none; border:none; box-shadow:none;"/>
+									</li>
+									<li class="fragment" style="margin-top: 20px">
+										break & continue
+										<br>
+										<img src="images/break_continue.png" border=none width="50%" height="50%" style="background:none; border:none; box-shadow:none;"/>
+									</li>
+							</ul>
+						</div>
 					</section>
 
 					<section>
-						<h3>Getting list data in Bloomberg</h3>
-						<img src="images/bliss.png" style="width:80%; height:70%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
-						<aside class="notes">
-							Fortunately this is not an old problem, and there are two services that Bloomberg Applications can use to get list data. The first one is by calling a static list service, which uses a request-response paradigm. To get the content of a list you simply send a request, and the service will respond by telling you what securities are in the list. But you essentially have to keep sending requests to make sure you always have the latest list content.
-						</aside>
+						<h5 style="font-size: 80%" align="left">What's different in symbolic execution?</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+						<p style="font-size: 80%"text-align="left">continue --stop-upon-branching</p>
+							<ul style="margin-left: 50px; padding: 0px; font-size: 75%" text-align="left">
+								<li>continue until execution branches, then pick a path</li>
+							</ul>
+							<br>
+							<img class="fragment" src="images/select_state.png" border=none width="60%" height="60%" style="margin-left: 20px; background:none; border:none; box-shadow:none;"/>
+							<img class="fragment" src="images/navigate_tree.png" border=none width="37%" height="65%" style="position:absolute; left:650px; top:220px; background:none; border:none; box-shadow:none;"/>
+						</div>
 					</section>
-
+					
 					<section>
-						<h3>Getting list data in Bloomberg</h3>
-						<img src="images/dlist.png" style="width:80%; height:50%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
-						<aside class="notes">
-							To solve this problem, there is a dynamic list service for getting list data at Bloomberg. This service adopts a pub-sub paradigm. To get the content of a list, your application subscribes to the service, if at some point the list has been changed by the user, the dlist service will publish an update to your application, to notify your application some changes happened to that list. However the dynamic list service is very new and it’s not ready to handle to load we have at the moment. 
-						</aside>
-					</section>
-
-					<section>
-						<h3 style="color:cyan">List publisher for Alerts</h3>
-						<img src="images/alertlistpub.png" style="width:100%; height:100%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
-						<aside class="notes">
-							So the key part of my project, is to build a list publisher for our alert infrastructure, that utilises both static & dynamic list service mentioned above. When the user creates an alert on a list, the core alert engine, will subscribe to the alertlistpub, the alert list pub will choose to either forward this subscription to the dynamic list service, if it thinks this list is likely to be changed very often. Otherwise it queries the static list service periocially, the interval is based on how often the list changes. As far as the core alert engine is concerned, it thinks all updates it receives are real-time. And the list publisher makes sure we get as much real time update as possible without overloading the dlist engine. 
-						</aside>
-					</section>
-
-<!-- 					<section>
-						<h3 style="color:cyan">Learning Outcomes</h3>
-						<ul>
-							<li>
-								Better understanding of relevant courses
-								<ul style="font-size:24px; color:white">
-									<li>Software Engineering - Design</li>
-									<li>Concurrency</li>
-									<li>Compiler</li>
-								</ul>
-							</li>
-							<li>C++ coding practices, techniques</li>
-							<li>Test Driven Development</li>
-						</ul>
-						<aside class="notes">
-							By working on this project, I was able to gain some further understanding of some concepts introduced in the courses at Imperial, for example how to apply common design patterns to create scalable and reusable components, and how to design the threading of your application to avoid concurrency bugs. Since the list publisher is a C++ service, I also learned some more in-depth c++ coding techniques & practices during the development. For example how to code for production and log the correct information at the correct place so that when my application does go down, I can debug it more easily. In terms of the state of the project, by the time I finished my placement, the list alert feature is now deployed and rolled out to internal users.
-						</aside>
-					</section> -->
-
-					<section>
-						<h3 style="color:cyan">Building the list alert feature</h3>
-						<ul style="margin: 0px 0px; list-style:none">
-							<li style="margin: 20px 0">&#9745 Frontend UI changes</li>
-							<!-- <li>Coding for production</li> -->
-							<li style="margin: 20px 0">&#9745 Changes in existing backend services</li>
-							<li style="margin: 20px 0 ">
-								&#9745 Building a backend service for getting list data
-							</li>
-							<li style="margin: 20px 0 ">
-								&#9745 List alert feature rolled out to internal users
-							</li>
-						</ul>
+						<h5 style="font-size: 80%" align="left">What's different in symbolic execution?</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<p style="font-size: 80%"text-align="left">breakpoints are set for all states</p>
+							<br>
+							<pre style="padding: 0%; margin: 0%; width: 70%; margin-left: 80px"><code class="c" style="padding: 0%">
+  if (x) {
+    ...
+  } else {
+    ...
+  }
+  // A breakpoint set on the next line will
+  // stop twice, once for each state
+  x++;
+  ..
+							</code></pre>
+						</div>
 					</section>
 				</section>
-				
+
 				<section>
 					<section>
-						<h3>Alert system testing using docker</h3>
+						<h3> Working with States</h3>
 					</section>
 					<section>
-						<h3>The Alerts pipeline</h3>
-						<img src="images/pipeline.png" style="width:120%; height:120%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
-						<aside class="notes">
-							The second project is a system testing tool built for the Alert infrastructure. The alert infrastructure consists of several backend services, each of them is responsible for a different thing, like accessing database, talking to external services or evaluating alert conditions when there is a market event. When the user creates an alert, it goes through all these services, gets processed, so that triggers can be delivered to the user. These services each has their respective unit test, and integration test suite, but these tests only verify the correctness of an individual application, they are not very good at catching bugs that could happen during the interaction between different components.
-						</aside>
-					</section>
-					<section>
-						<h3>We want to build a test that ..</h3>
-						<ul style="margin-left:10px">
-							<li style="margin: 20px 0">tests the entire alerts pipeline at once</li>
-							<li style="margin: 20px 0">is fully automated</li>
-							<li style="margin: 20px 0">is fully isolated</li>
-						</ul>
-						<aside class="notes">
-							 So we wanted to build a test that simulates a production like environment so that it allows us to test all the applications in the alert infrastructure at once. At the same time, this test should be fully automated and fully isolated, which means it does not rely on any external services being available, and can be run anywhere.
-						</aside>
-
-					</section>
-					<section>
-						<h3>Containers</h3>
-						<p style="text-align:left">
-							<small>A container image is a lightweight, stand-alone, executable package of a piece of software that includes everything needed to run it: code, runtime, system libraries, settings.</small>
-							</br>
-							</br>
-						</p>
-						<img src="images/docker.png" style="width:10%; height:10%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
-						<p style="text-align:left">
-							<small>Docker provides tools that make it easy to package, ship and run any application in a lightweight container.</small>
-						</p>
-						<aside class="notes">
-							Given these requirements, we decided to use containers to build the test, and more specifically docker. A container is basically a light-weight executable package of an application that contains everything needed to run the application, including code, libraries and configurations. And docker provides tools that makes running applications in containers a lot easier.
-						</aside>
-					</section>
-					<section>
-						<h3>Build the test with docker</h3>
-						<img src="images/compose.png" style="width:100%; height:100%; background:none; border:0; margin-top:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
-						<aside class="notes">
-							 So this is how the test is structured, each application in the alert pipeline is run in a separate container. The reason to do this is to make sure that the applications do not interfere with each other. For example if we change the system clock of a container for testing purpose, we don't have to worry about breaking another service which also relies on the system clock since it runs in a different container. Then we also bring up a container that runs the test, it will send mock alert definitions into the alert system, and expect certain triggers to be sent out at the end of the alert pipeline. We also use an orchestrating tool, docker-compose, so that the applications in different containers can join the same network and communicate with each other, this basically completes the final step of creating a production-like setup.
-						</aside>
-					</section>
-					<!-- <section>
-						<h3>Behave framework</h3>
-						<pre><code data-trim data-noescape>
-							Feature: showing off behave
-							
-							  Scenario: run a simple test
-								 Given we have behave installed
-								 when we implement a test
-								 then behave will test it for us!	
-						</code></pre>
-						<pre><code data-trim data-noescape>
-							from behave import *
-							
-							@given('we have behave installed')
-							def step_impl(context):
-								pass
-							
-							@when('we implement a test')
-							def step_impl(context):
-								assert True is not False
-							
-							@then('behave will test it for us!')
-							def step_impl(context):
-								assert context.failed is False
-						</code></pre>
-						<aside class="notes">
-							That’s why we decided to use a framework behave. Behave is a python testing framework. It allows test cases to be written in a syntax similar to natural language and we think it's very suitable for writing high-level system test. Here we say 
-In our case with the alert system, we might say when a user creatrice change alerts. When there is a tick, user gets an e-mail. Behind all these English sentences there are some python code, this is where we actually implement the test and mock all the external services that might get called during the test. 
-						</aside>
-					</section> -->
-					<section>
-						<h3>Integrate the test into CI pipeline</h3>
-						<img src="images/ci.png" style="width:100%; height:100%; background:none; border:0; box-shadow: 0px 0px 0px rgba(0, 0, 0, .0)">
-						<aside class="notes">
-							
-						</aside>
+						<h5 style="font-size: 80%" align="left">Examine State Information</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul class="fragment" style="margin-left: 50px; padding: 0px; font-size: 75%" text-align="left">
+									<li style="margin-top: 40px"> info stack </li>
+							</ul>
+							<br>
+							<img class="fragment" src="images/info_stack.png" border=none width="70%" height="70%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+						</div>
 					</section>
 
-<!-- 					<section>
-						<h3>Learning Outcomes & Summary</h3>
-						<ul>
-							<li>Python coding</li>
-							<li>New technologies (for me) - docker, behave</li>
-							<li>Test suite is being extended as new featuers are implemented</li>
-						</ul>
-						<aside class="notes">
-							During this project, I learned some python coding, how to use docker & behave framework, those are all technologies that I was not familiar with but are pretty popular in the industry. In terms of the end results, I've built the test and written several initial test cases. The test is integrated into the continuous integration pipeline of the Alerts team, and the test suite is run for each pull request on any of the alert infra services.
-					</section> -->
+					<section>
+						<h5 style="font-size: 80%" align="left">Examine State Information</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul class="fragment" style="margin-left: 50px; padding: 0px; font-size: 75%" text-align="left">
+								<li style="margin-top: 40px"> info constraints </li>
+							</ul>
+							<br>
+							<img class="fragment" src="images/info_constraints.png" border=none width="55%" height="55%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+						</div>
+					</section>
+
+					<section>
+						<h5 style="font-size: 80%" align="left">Examine State Information</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul class="fragment" style="margin-left: 50px; padding: 0px; font-size: 75%" text-align="left">
+								<li style="margin-top: 40px"> info state </li>
+							</ul>
+							<br>
+							<img class="fragment" src="images/info_state.png" border=none width="55%" height="55%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+						</div>
+					</section>
+
+					<section>
+						<h5 style="font-size: 80%" align="left">Examine State Information</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul class="fragment" style="margin-left: 50px; padding: 0px; font-size: 75%" text-align="left">
+								<li style="margin-top: 40px"> info states [--compact] </li>
+							</ul>
+							<br>
+							<img class="fragment" src="images/normal_vs_compact.png" border=none width="110%" height="110%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+						</div>
+					</section>
+
+
+					<section>
+						<h5 style="font-size: 80%" align="left">Select a State</h5>
+						<hr>
+						<p align="left" style="font-size: 75%">Searcher - State Scheduling Algorithms</p>
+						<div style="margin:0; padding:0" align="left">
+							<ul style="margin-left: 70px; padding: 0px; font-size: 75%" text-align="left">
+								<li style="margin-top: 20px">dfs searcher</li>
+								<li style="margin-top: 50px">bfs searcer</li>
+								<li style="margin-top: 50px">random searcher</li>
+								<li style="margin-top: 50px">...</li>
+							</ul>
+						</div>
+					</section>
+
+					<section>
+						<h5 style="font-size: 80%" align="left">Searcher API</h5>
+						<hr>
+						<p align="left" style="font-size: 75%">selectState + update</p> 
+						<img class="fragment" src="images/searcher_api.png" border=none width="70%" height="70%" style=" margin-left:0px; padding-top: 0%; background:none; border: none; box-shadow:none;"/>
+					</section>
+
+					<section>
+						<h5 style="font-size: 80%" align="left">Chain of Searchers</h5>
+						<hr>
+						<!-- <p align="left" style="font-size: 75%">selectState + update</p> -->
+						<img class="fragment" src="images/searcher_chain.png" border=none width="70%" height="70%" style=" margin-left:0px; padding-top: 0%; background:none; border: none; box-shadow:none;"/>
+					</section>
+					
+					<section>
+						<h5 style="font-size: 80%" align="left">Navigate between States</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<p align="left" style="font-size: 70%">DebugSearcher</p>
+							<ul style="margin-left: 70px; padding: 0px; font-size: 65%" text-align="left">
+									<li>allows user to select a state, or</li>
+									<li style="margin-top: 20px">delegates to underlying searcher</li>
+							</ul>
+							<p class="fragment" fragment-data-index="1" align="left" style="font-size: 70%; margin-top:50px">Commands</p>
+							<ul class="fragment" fragment-data-index="1" style="margin-left: 70px; padding: 0px; font-size: 65%" text-align="left">
+									<li>state next</li>
+									<li style="margin-top: 20px">state prev</li>
+									<li style="margin-top: 20px">state &ltaddress&gt</li>
+							</ul>
+							<img class="fragment" fragment-data-index="2" src="images/navigate_states.png" border=none width="50%" height="75%" style="position: absolute; top:100px; left:450px; background:none; border:none; box-shadow:none;"/>
+						</div>
+					</section>
+
+					<section>
+						<h5 style="font-size: 80%" align="left">Killing Execution States</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul style="margin-left: 70px; padding: 0px; font-size: 75%" text-align="left">
+								<li>terminate
+									<ul style="padding: 0px; font-size: 75%" text-align="left">
+									<li>terminate current state</li>
+								</ul></li>
+								<li style="margin-top: 90px">terminate --others
+									<ul style="padding: 0px; font-size: 75%" text-align="left">
+									<li>terminate all <font color="red">but</font> the current state</li>
+								</ul></li>
+							</ul>
+						</div>
+					</section>
+
+					<section>
+						<h5 style="font-size: 80%" align="left">Killing Execution States</h5>
+							<hr>
+							<div style="margin:0; padding:0" align="left">
+								<ul style="margin-left: 70px; padding: 0px; font-size: 75%" text-align="left">
+									<li>killpoint
+										<ul style="padding: 0px; font-size: 75%" text-align="left">
+										<li>kill &ltfile:line&gt, kill &ltfunction&gt</li>
+										<li>kill all states reaching the given location</li>
+										<li>"prune" the symbolic execution tree</li>
+									</ul></li>
+								</ul>
+								<br>
+								<img class="fragment" src="images/killpoint.png" border=none width="35%" height="35%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+                        </div>
+                    </section>
+
+					<section>
+                            <h5>Demo</h5>
+                            <hr>
+                            <pre style="padding: 0%; margin-left: 120px; width: 70%"><code align="left" class="c" style="padding: 0%">
+      int get_sign(int x) {
+        if (x == 0)
+          return 0;
+      
+        if (x < 0) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+    
+      int main() {
+        int a;
+        klee_make_symbolic(&a, sizeof(a), "a");
+        return get_sign(a);
+      }
+                                                              </code></pre>
+                        </section>
+
 				</section>
 				<section>
-						<h3 style="color:cyan">Learning Outcomes & Conclusion</h3>
-						<ul>
-							<li>
-								Better understanding of relevant courses
-								<ul style="font-size:24px; color:white">
-									<li>Software Engineering - Design</li>
-									<li>Concurrency</li>
-									<li>Compiler</li>
-								</ul>
-							</li>
-							<li>Good coding practices, techniques</li>
-							<li>Soft skills</li>
-						</ul>
-						<aside class="notes">
-							By working on this project, I was able to gain some further understanding of some concepts introduced in the courses at Imperial, for example how to apply common design patterns to create scalable and reusable components, and how to design the threading of your application to avoid concurrency bugs. Since the list publisher is a C++ service, I also learned some more in-depth c++ coding techniques & practices during the development. For example how to code for production and log the correct information at the correct place so that when my application does go down, I can debug it more easily. In terms of the state of the project, by the time I finished my placement, the list alert feature is now deployed and rolled out to internal users.
-						</aside>
+					<section>
+						<h3>Print/Symbolise Variables</h3>
+					</section>
+					<section>
+						<h5 align="left">Print/Symbolise Variables</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul style="margin-left: 70px; padding: 0px; font-size: 75%" text-align="left">
+								<li>print &ltvar&gt
+									<ul style="padding: 0px; font-size: 75%" text-align="left">
+									<li>Print a variable's value, concrete or symbolic </li>
+									<img class="fragment" data-fragment-index="1" src="images/printing.png" border=none width="55%" height="55%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+									</ul>
+								<br>
+								</li>
+							</ul>
+						</div>
+						<div class="fragment" data-fragment-index="2" style="position: absolute; left:150px; top:190px; padding: 0px; margin: 0px;">
+							<svg width="410" height="120" class= "fragment fade-out" data-fragment-index="3" >
+									<rect x="10" y="10" width="300" height="85" style="fill:transparent; stroke-width:2;stroke:red" />
+							</svg>
+						</div>
+						<div class="fragment" data-fragment-index="3" style="position: absolute; left:150px; top:275px; padding: 0px; margin: 0px;">
+							<svg width="411" height="131" class= "fragment fade-out" data-fragment-index="4" >
+									<rect x="10" y="10" width="300" height="85" style="fill:transparent; stroke-width:2;stroke:red" />
+							</svg>
+						</div>
+						<div class="fragment" data-fragment-index="4" style="position: absolute; left:150px; top:360px; padding: 0px; margin: 0px;">
+							<svg width="410" height="120" class= "fragment fade-out" data-fragment-index="5" >
+									<rect x="10" y="10" width="400" height="85" style="fill:transparent; stroke-width:2;stroke:red" />
+							</svg>
+						</div>
+						<div class="fragment" data-fragment-index="5" style="position: absolute; left:150px; top:445px; padding: 0px; margin: 0px;">
+							<svg width="500" height="200">
+									<rect x="10" y="10" width="460" height="137" style="fill:transparent; stroke-width:2;stroke:red" />
+							</svg>
+						</div>
+					</section>
+
+					<section>
+						<h5 align="left">Print/Symbolise Variables</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul style="margin-left: 70px; padding: 0px; font-size: 75%" text-align="left">
+								<li>set-symbolic &ltvar&gt
+									<ul style="padding: 0px; font-size: 75%" text-align="left">
+									<li>Symbolise a variable</li>
+									<img class="fragment" data-fragment-index="1" src="images/symbolise.png" border=none width="55%" height="55%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+									</ul>
+								<br>
+								</li>
+							</ul>
+						</div>
+						<div class="fragment" data-fragment-index="2" style="position: absolute; left:150px; top:190px; padding: 0px; margin: 0px;">
+								<svg width="410" height="120" class= "fragment fade-out" data-fragment-index="3" >
+										<rect x="10" y="10" width="335" height="87" style="fill:transparent; stroke-width:2;stroke:red" />
+								</svg>
+							</div>
+							<div class="fragment" data-fragment-index="3" style="position: absolute; left:150px; top:282px; padding: 0px; margin: 0px;">
+								<svg width="411" height="131" class= "fragment fade-out" data-fragment-index="4" >
+										<rect x="10" y="10" width="300" height="85" style="fill:transparent; stroke-width:2;stroke:red" />
+								</svg>
+							</div>
+							<div class="fragment" data-fragment-index="4" style="position: absolute; left:150px; top:380px; padding: 0px; margin: 0px;">
+								<svg width="410" height="120" class= "fragment fade-out" data-fragment-index="5" >
+										<rect x="10" y="10" width="370" height="60" style="fill:transparent; stroke-width:2;stroke:red" />
+								</svg>
+							</div>
+							<div class="fragment" data-fragment-index="5" style="position: absolute; left:150px; top:440px; padding: 0px; margin: 0px;">
+								<svg width="410" height="120">
+										<rect x="10" y="10" width="370" height="85" style="fill:transparent; stroke-width:2;stroke:red" />
+								</svg>
+							</div>
+					</section>
 				</section>
-<!-- 				<section>
-					<h3>Conclusion</h3>
-					<ul style="margin-left:10px; list-style:none">
-						<li style="margin: 20px 0; color:#449E44">+ Technical skill development</li>
-						<li style="margin: 20px 0; color:#449E44">+ Soft skill development</li>
-						<li style="margin: 20px 0; color:#449E44">+ Building a network - nice people, lots of events</li>
-						<li style="margin: 20px 0; color:red">- Some work involves hacking around legacy code</li>
-					</ul>
-					<aside class="notes">
-						Some conclusions about the overall placement experience. I believe I was able to improve my technical skills by doing lots of practical work, some of them are client facing & some of them are for internal developers. Also by working with my team & working with other teams, I learned some soft skills, so for example how to write a ticket to other teams, or how to chase after other people when they are not very responsive etc. And from what I’ve seen, the people here great, they are very helpful and very nice. The company also organised tons of events including tech talks, networking and some volunteering. One thing that could be improved IMO is that some project involves working with legacy code. But overall I think the projects are great and they are highly relevant to our course and the placement experience is fantastic. Thanks for listening, any questions?
-					</aside>
-				</section> -->
+
+				<section>
+					<section>
+						<h5>Other Relevant Commands</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul style="margin-left: 70px; padding: 0px; font-size: 75%" text-align="left">
+								<li>generate-input</li>
+								<li>list</li>
+								<li>info breakpoint/killpoint</li>
+								<li>delete</li>
+								<li>help</li>
+							</ul>
+						</div>
+
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h5>Use Case Demos</h5>
+					</section>
+                </section>
+                
+				<section>
+                    <section>
+                        <h3>Related and Future Work</h3>
+                    </section>
+
+                    <section>
+                        <h5 align="left">The Symbolic Execution Debugger (SED) </h5>
+                        <hr>
+                        <div style="margin:0; padding:0" align="left">
+                            <ul style="margin-left: 70px; padding: 0px; font-size: 65%" text-align="left">
+                                <li>Based on Eclipse and KeY</li>
+                                <li>GUI</li>
+                                <li>Verify specification written in JML</li>
+                                <img class="fragment" src="images/sed.png" border=none width="55%" height="55%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h5 align="left">symgdb</h5>
+                        <hr>
+                        <div style="margin:0; padding:0" align="left">
+                            <ul style="margin-left: 70px; padding: 0px; font-size: 65%" text-align="left">
+                                <li>GDB plugin for symbolic execution</li>
+                                <li>Based on trition - a Dynamic Binary Analysis (BDA) framework</li>
+                                <img class="fragment" src="images/symgdb.png" border=none width="65%" height="65%" style=" margin-left:50px; background:none; border:none; box-shadow:none;"/>
+                            </ul>
+                        </div>
+                    </section>
+
+					<section>
+						<h5 align="left">Future work</h5>
+						<hr>
+						<div style="margin:0; padding:0" align="left">
+							<ul style="margin-left: 70px; padding: 0px; font-size: 75%" text-align="left">
+								<li>Better support for debugging optimised code</li>
+								<li>Source-level expression evaluation</li>
+								<li>More in-depth state commands (e.g. grep) </li>
+								<li>Graphical interface</li>
+                            </ul>
+						</div>
+					</section>
+				</section>
+
 				<section>
 					Thanks for listening! Questions?
 				</section>
-
 			</div>
 		</div>
 
