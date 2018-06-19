@@ -11,7 +11,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/default.css">
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/headjs/0.96/head.min.js"></script>
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -64,6 +64,11 @@
 						</div>
 
 						<aside class="notes">
+                            Testing is important for building software.
+                            Each test only checks one set of input, hard to cover edge cases, rare features.
+                            Not to mention some programs have nondeterministic behaviours.
+                            Very hard to guarantee good coverage.
+                            Random testing is not efficient at finding deep errors.
 						</aside>
 					</section>
 					<section>
@@ -81,7 +86,7 @@
           return;
       }
 
-      if (a > 0) {
+      if (a < 0) {
           printf("%d %d\n", a, b);
           return;
       } else {
@@ -149,7 +154,12 @@
 								<li style="margin-top:50px">Use developers' knowledge to <font class="fragment highlight-red">guide symbolic execution</font></li>
 							</ul>
 						</div>
-					</section>
+                    </section>
+                    
+                    <aside class="notes">
+                        On the other side, we use interactive debuggers for dynamic analysis.
+                        Allows controlling execution and examine a running program.
+                    </aside>
 
 				</section>
 
